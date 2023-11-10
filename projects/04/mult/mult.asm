@@ -8,3 +8,37 @@
 // (R0, R1, R2 refer to RAM[0], RAM[1], and RAM[2], respectively.)
 
 //// Replace this comment with your code.
+
+//set r2=0
+@2
+M=0
+
+//set i=0
+@i
+M=0
+
+(LOOP)
+//i-r1=0 then break
+@i
+D=M
+@1
+D=D-M
+@END
+D;JEQ
+
+//add r0 to r2
+@0
+D=M
+@2
+M=D+M
+
+//i++
+@i
+M=M+1
+@LOOP
+0;JMP
+
+(END)
+
+@END
+0;JMP
