@@ -1,0 +1,7 @@
+CHIP doubleDFF{
+    IN in[16];
+    OUT out[16];
+    PARTS:
+    Register(in=in, load=true, out=mid);
+    PC(in=mid, load=true, inc=true, reset=false, out=out);
+}
