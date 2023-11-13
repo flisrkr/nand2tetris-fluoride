@@ -56,7 +56,9 @@ CHIP CPU {
     //j
     And(a=instruction[2], b=ng, out=j1);
     And(a=instruction[1], b=zr, out=j2);
-    Or(a=ng, b=zr, out=ps);
+    Not(in=ng, out=notng);
+    Not(in=zr, out=notzr);
+    And(a=notng, b=notzr, out=ps);
     And(a=instruction[0], b=ps, out=j3);
     Or(a=j1, b=j2, out=j12);
     Or(a=j12, b=j3, out=j123);

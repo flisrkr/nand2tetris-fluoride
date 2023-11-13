@@ -19,11 +19,10 @@ CHIP Memory {
     OUT out[16];
 
     PARTS:
-    Not(in=address[14], out=RAMload);
-    Not(in=address[13], out=Scrload);
-    RAM16K(in=in, load=RAMload, address=address[0..13], out=RAMout);
-    Screen(in=in, load=Scrload, address=address[0..12], out=Scrout);
-    Keyboard(out=Keyout);
-    Mux16(a=Scrout, b=Keyout, sel=address[13], out=IO);
-    Mux16(a=RAMout, b=IO, sel=address[14], out=out);
+    DMux4Way(in=load, sel=address[13..14], a=loadA, b=loadB, c=loadS, d=loadK);
+    Or(a=loadA, b=loadB, out=loadR);
+    RAM16K(in=in, load=loadR, address=address[0..13], out=outR);
+    Screen(in=in, load=loadS, address=address[0..12], out=outS);
+    Keyboard(out=outK);
+    Mux4Way16(a=outR, b=outR, c=outS, d=outK, sel=address[13..14], out=out); 
 }
